@@ -13,11 +13,11 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String content;
-
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "user_id")
-    private User user;
+    private User author;
+
+    private String content;
 
 }
