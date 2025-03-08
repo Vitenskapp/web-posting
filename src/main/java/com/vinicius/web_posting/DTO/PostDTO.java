@@ -4,9 +4,10 @@ import com.vinicius.web_posting.Model.Post;
 import com.vinicius.web_posting.Model.User;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public record PostDTO(Long id, String author, String content, LocalDateTime createdAt) {
+public record PostDTO(Long id, String author, String content, ZonedDateTime createdAt) {
     public PostDTO(Post post) {
         this(post.getId(),
                 Optional.ofNullable(post.getAuthor())
