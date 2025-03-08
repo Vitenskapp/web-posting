@@ -1,6 +1,7 @@
 package com.vinicius.web_posting.Model;
 
 import com.fasterxml.jackson.annotation.*;
+import com.vinicius.web_posting.DTO.PostDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class Post {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     @JsonBackReference
     private User author;
 

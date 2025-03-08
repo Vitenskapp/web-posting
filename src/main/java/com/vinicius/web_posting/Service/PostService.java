@@ -35,9 +35,7 @@ public class PostService {
 
     }
 
-    @CacheEvict(value = "posts", allEntries = true)
-    @Transactional
-    public void deletePost(Long id) {
+    public void deletePostById(Long id) {
 
         postRepository.deleteById(id);
 
