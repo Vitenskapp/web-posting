@@ -1,5 +1,6 @@
 package com.vinicius.web_posting.Service;
 
+import com.vinicius.web_posting.DTO.PostDTO;
 import com.vinicius.web_posting.Model.Post;
 import com.vinicius.web_posting.Repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,15 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public List<Post> getAllPosts() {
+    public List<PostDTO> getAllPosts() {
 
-        return postRepository.findAll();
+        return postRepository.findAll().stream().map(PostDTO::new).toList();
 
     }
 
-    public Optional<Post> getPostById(Long id) {
+    public Optional<PostDTO> getPostById(Long id) {
 
-        return postRepository.findById(id);
+        return postRepository.findById(id).map(PostDTO::new);
 
     }
 

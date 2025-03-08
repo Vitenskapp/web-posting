@@ -1,5 +1,6 @@
 package com.vinicius.web_posting.Controller;
 
+import com.vinicius.web_posting.DTO.PostDTO;
 import com.vinicius.web_posting.Model.Post;
 import com.vinicius.web_posting.Service.PostService;
 import org.apache.coyote.Response;
@@ -18,13 +19,15 @@ public class PostController {
     private PostService postService;
 
     @GetMapping
-    private ResponseEntity<List<Post>> getPosts() {
+    private ResponseEntity<List<PostDTO>> getPosts() {
         return ResponseEntity.ok(postService.getAllPosts());
     }
 
     @PostMapping
     public ResponseEntity<Post> createPost(@RequestBody Post post) {
+
         return ResponseEntity.ok(postService.createPost(post));
+
     }
 
     @DeleteMapping("/{id}")
