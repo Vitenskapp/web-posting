@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "post_table")
 @Data
-@Getter
-@Setter
 public class Post {
 
     @Id
@@ -21,12 +19,12 @@ public class Post {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User author;
 
     private String content;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
 }

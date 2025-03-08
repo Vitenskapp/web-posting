@@ -27,8 +27,6 @@ public class PostController {
     @PostMapping
     public ResponseEntity<Post> createPost(@RequestBody Post post) {
 
-        post.setCreatedAt(LocalDateTime.now());
-
         return ResponseEntity.ok(postService.createPost(post));
 
     }
