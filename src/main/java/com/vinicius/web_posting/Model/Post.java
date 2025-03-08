@@ -1,7 +1,6 @@
 package com.vinicius.web_posting.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -25,6 +24,7 @@ public class Post {
 
     private String content;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt = LocalDateTime.now();
 
 }

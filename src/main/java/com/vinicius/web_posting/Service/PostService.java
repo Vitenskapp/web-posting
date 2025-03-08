@@ -3,7 +3,9 @@ package com.vinicius.web_posting.Service;
 import com.vinicius.web_posting.DTO.PostDTO;
 import com.vinicius.web_posting.Model.Post;
 import com.vinicius.web_posting.Repository.PostRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +35,8 @@ public class PostService {
 
     }
 
+    @CacheEvict(value = "posts", allEntries = true)
+    @Transactional
     public void deletePost(Long id) {
 
         postRepository.deleteById(id);
