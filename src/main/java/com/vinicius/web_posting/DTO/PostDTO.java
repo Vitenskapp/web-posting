@@ -1,11 +1,16 @@
 package com.vinicius.web_posting.DTO;
 
 import com.vinicius.web_posting.Model.Post;
+import com.vinicius.web_posting.Model.User;
 
 import java.util.Optional;
 
 public record PostDTO(Long id, String author, String content) {
     public PostDTO(Post post) {
-        this(post.getId(), post.getAuthor().getName(), post.getContent());
+        this(post.getId(),
+                Optional.ofNullable(post.getAuthor())
+                        .map(User::getName)
+                        .orElse("Desconhecido"),
+                post.getContent());
     }
 }
