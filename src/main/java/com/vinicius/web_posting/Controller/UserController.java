@@ -1,5 +1,6 @@
 package com.vinicius.web_posting.Controller;
 
+import com.vinicius.web_posting.DTO.UserDTO;
 import com.vinicius.web_posting.Model.User;
 import com.vinicius.web_posting.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,14 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<List<UserDTO>> getUsers() {
+        return ResponseEntity.ok(userService.getAllUsers().stream().map(UserDTO::new).toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id) {
-        Optional<User> findedUser = userService.getUserById(id);
-        return ResponseEntity.ok(findedUser);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        User findedUser = userService.getUserById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return ResponseEntity.ok(new UserDTO(findedUser));
     }
 
     @PostMapping

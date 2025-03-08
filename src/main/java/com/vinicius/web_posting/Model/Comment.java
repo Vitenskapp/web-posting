@@ -1,36 +1,38 @@
 package com.vinicius.web_posting.Model;
 
-import com.fasterxml.jackson.annotation.*;
-import com.vinicius.web_posting.DTO.PostDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.vinicius.web_posting.DTO.UserDTO;
+import com.vinicius.web_posting.Repository.PostRepository;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "post_table")
-@Data
-public class Post {
+@Table(name = "post_comment_table")
+@Getter
+@Setter
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
-    private User author;
+    @JoinColumn(name = "author_id")
+    private User commentAuthor;
 
     private String content;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id", nullable = false)
     @JsonManagedReference
-    private List<Comment> comments;
+    private Post post;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "America/Sao_Paulo")
     private ZonedDateTime createdAt = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
