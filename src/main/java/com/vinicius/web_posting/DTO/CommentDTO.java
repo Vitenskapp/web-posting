@@ -7,10 +7,10 @@ import com.vinicius.web_posting.Model.User;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public record CommentDTO(Long id, Long commentAuthorId, String content, ZonedDateTime createdAt, Long postId) {
+public record CommentDTO(Long id, String commentAuthor, String content, ZonedDateTime createdAt, Long postId) {
     public CommentDTO(Comment comment) {
         this(comment.getId(),
-                comment.getCommentAuthor().getId(),
+                comment.getCommentAuthor().getName(),
                 comment.getContent(),
                 comment.getCreatedAt(),
                 Optional.ofNullable(comment.getPost())
