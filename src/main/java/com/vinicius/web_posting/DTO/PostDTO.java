@@ -7,13 +7,15 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public record PostDTO(Long id, String author, String content, ZonedDateTime createdAt) {
+public record PostDTO(Long id, String author, String content, ZonedDateTime createdAt, Integer likeCount) {
     public PostDTO(Post post) {
         this(post.getId(),
                 Optional.ofNullable(post.getAuthor())
                         .map(User::getName)
                         .orElse("Desconhecido"),
                 post.getContent(),
-                post.getCreatedAt());
+                post.getCreatedAt(),
+                post.getLikes().size()
+        );
     }
 }

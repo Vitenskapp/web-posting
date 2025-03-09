@@ -1,6 +1,7 @@
 package com.vinicius.web_posting.Controller;
 
 import com.vinicius.web_posting.DTO.PostDTO;
+import com.vinicius.web_posting.Model.Like;
 import com.vinicius.web_posting.Model.Post;
 import com.vinicius.web_posting.Repository.PostRepository;
 import com.vinicius.web_posting.Service.PostService;

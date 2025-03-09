@@ -1,7 +1,9 @@
 package com.vinicius.web_posting.Controller;
 
 import com.vinicius.web_posting.DTO.UserDTO;
+import com.vinicius.web_posting.Model.Like;
 import com.vinicius.web_posting.Model.User;
+import com.vinicius.web_posting.Service.LikeService;
 import com.vinicius.web_posting.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private LikeService likeService;
+
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers() {
         return ResponseEntity.ok(userService.getAllUsers().stream().map(UserDTO::new).toList());
@@ -32,6 +37,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.createUser(user));
+    }
+
+    @PostMapping("/{userId}/like/{postId}")
+    public ResponseEntity<Like> likePost(@PathVariable Long userId , @PathVariable Long postId) {
+        return ResponseEntity.ok(likeService.toggleLike(userId, postId));
     }
 
 }
