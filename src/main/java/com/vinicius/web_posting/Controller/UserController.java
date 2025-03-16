@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -32,16 +31,6 @@ public class UserController {
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         User findedUser = userService.getUserById(id).orElseThrow(() -> new RuntimeException("User not found"));
         return ResponseEntity.ok(new UserDTO(findedUser));
-    }
-
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return ResponseEntity.ok(userService.createUser(user));
-    }
-
-    @PostMapping("/{userId}/like/{postId}")
-    public ResponseEntity<Like> likePost(@PathVariable Long userId , @PathVariable Long postId) {
-        return ResponseEntity.ok(likeService.toggleLike(userId, postId));
     }
 
 }

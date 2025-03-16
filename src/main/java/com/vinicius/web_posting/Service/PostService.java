@@ -23,9 +23,9 @@ public class PostService {
 
     }
 
-    public Optional<PostDTO> getPostById(Long id) {
+    public Optional<Post> getPostById(Long id) {
 
-        return postRepository.findById(id).map(PostDTO::new);
+        return postRepository.findById(id);
 
     }
 

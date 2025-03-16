@@ -4,6 +4,7 @@ import com.vinicius.web_posting.DTO.CommentDTO;
 import com.vinicius.web_posting.DTO.PostDTO;
 import com.vinicius.web_posting.Model.Comment;
 import com.vinicius.web_posting.Model.Post;
+import com.vinicius.web_posting.Model.User;
 import com.vinicius.web_posting.Repository.CommentRepository;
 import com.vinicius.web_posting.Repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class CommentService {
 
     }
 
-    public Optional<CommentDTO> getCommentById(Long id) {
+    public Optional<Comment> getCommentById(Long id) {
 
-        return commentRepository.findById(id).map(CommentDTO::new);
+        return commentRepository.findById(id);
 
     }
 
