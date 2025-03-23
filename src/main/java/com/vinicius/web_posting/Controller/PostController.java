@@ -2,6 +2,7 @@ package com.vinicius.web_posting.Controller;
 
 import com.vinicius.web_posting.DTO.LikeDTO;
 import com.vinicius.web_posting.DTO.PostDTO;
+import com.vinicius.web_posting.Model.Enums.UserRole;
 import com.vinicius.web_posting.Model.Like;
 import com.vinicius.web_posting.Model.Post;
 import com.vinicius.web_posting.Model.User;
@@ -94,6 +95,8 @@ public class PostController {
 
         if(!post.getAuthor().getId().equals(authenticatedUser.getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You not have permission to delete this post");
+        } else if (authenticatedUser.getRole().equals(UserRole.ADMIN)) {
+            postService.deletePostById(id);
         }
 
         postService.deletePostById(id);
