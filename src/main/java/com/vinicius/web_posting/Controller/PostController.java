@@ -61,6 +61,12 @@ public class PostController {
         return ResponseEntity.ok(postDTO);
     }
 
+    @GetMapping("/{id}/likes")
+    public ResponseEntity<List<LikeDTO>> getLikesFromPost(@PathVariable Long id) {
+
+        return ResponseEntity.ok(likeService.findLikesByPost(id).stream().map(LikeDTO::new).toList());
+    }
+
     @PostMapping
     public ResponseEntity<Post> createPost(@RequestBody Post post, HttpServletRequest request) {
 
