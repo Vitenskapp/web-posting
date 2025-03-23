@@ -1,7 +1,7 @@
 package com.vinicius.web_posting.Model.Enums;
 
 public enum UserRole {
-    ADMIN("admin"), USER("user");
+    ADMIN("ADMIN"), USER("USER");
 
     private String role;
 

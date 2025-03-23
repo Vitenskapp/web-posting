@@ -93,10 +93,11 @@ public class PostController {
         Post post = postService.getPostById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         User authenticatedUser = userRepository.findByName(tokenService.validateToken(jwtUtil.recoverToken(request))).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
+        if (authenticatedUser.getRole().equals(UserRole.ADMIN)) {
+            postService.deletePostById(id);
+        }
         if(!post.getAuthor().getId().equals(authenticatedUser.getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You not have permission to delete this post");
-        } else if (authenticatedUser.getRole().equals(UserRole.ADMIN)) {
-            postService.deletePostById(id);
         }
 
         postService.deletePostById(id);
